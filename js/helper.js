@@ -100,7 +100,7 @@ var map;    // declares a global map variable
 
 
 /*
-Start here! initializeMap() is called when page is loaded.
+    initializeMap() is called when page is loaded.
 */
 function initializeMap() {
 
@@ -116,7 +116,6 @@ function initializeMap() {
   */
   map = new google.maps.Map(document.querySelector('#map'), mapOptions);
 
-
   /*
   locationFinder() returns an array of every location string from the JSONs
   written for bio, education, and work.
@@ -126,15 +125,22 @@ function initializeMap() {
     // initializes an empty array
     var locations = [];
 
+    // Only add location if it doesn't already exist in the locations array.
+    function addLocation(loc) {
+      if (locations.indexOf(loc) === -1) {
+        locations.push(loc);
+      }
+    }
+
     // adds the single location property from bio to the locations array
-    locations.push(bio.contacts.location);
+    addLocation(bio.contacts.location);
 
     // iterates through school locations and appends each location to
     // the locations array. Note that forEach is used for array iteration
     // as described in the Udacity FEND Style Guide:
     // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
     education.schools.forEach(function(school){
-      locations.push(school.location);
+      addLocation(school.location);
     });
 
     // iterates through work locations and appends each location to
@@ -142,7 +148,7 @@ function initializeMap() {
     // as described in the Udacity FEND Style Guide:
     // https://udacity.github.io/frontend-nanodegree-styleguide/javascript.html#for-in-loop
     work.jobs.forEach(function(job){
-      locations.push(job.location);
+      addLocation(job.location);
     });
 
     return locations;
@@ -234,16 +240,12 @@ function initializeMap() {
 
 }
 
-/*
-Uncomment the code below when you're ready to implement a Google Map!
-*/
-
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function(e) {
   //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+  map.fitBounds(mapBounds);
+});
