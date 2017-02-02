@@ -16,7 +16,7 @@ var bio = {
   "display": function() {
     var formattedName = HTMLheaderName.replace(data, bio.name);
     var formattedRole = HTMLheaderRole.replace(data, bio.role);
-    var formattedPic = HTMLbioPic.replace(data, bio.bioPic);
+    var formattedPic = HTMLbioPic.replace(data, bio.biopic);
     var formattedMobile = HTMLmobile.replace(data, bio.contacts.mobile);
     var formattedEmail = HTMLemail.replace(data, bio.contacts.email);
     var formattedTwitter = HTMLtwitter.replace(data, bio.contacts.twitter);

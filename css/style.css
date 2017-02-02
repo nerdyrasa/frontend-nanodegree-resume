@@ -99,9 +99,27 @@ a {
   line-height: 28px;
 }
 
+#name {
+  font-family: 'Courgette', cursive;
+}
+
+#skills li span::before {
+  content: '\2713';
+  padding-right: 5px;
+}
+
 #skills-h3 {
   color: #f5ae23;
   display: none;
+}
+
+.role {
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  display: inline-block;
+  padding-left: 35px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .orange {
@@ -129,7 +147,7 @@ a {
 
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-color: rgba(72, 72, 72, 0.8);
 }
 
 .flex-box {
@@ -160,6 +178,7 @@ ul {
   float: left;
   padding: 10px;
   width: 200px;
+  border-radius: 50%;
   display: none;
 }
 
