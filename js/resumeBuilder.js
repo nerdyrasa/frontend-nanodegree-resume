@@ -10,7 +10,7 @@ var bio = {
   },
   "welcomeMessage": "Fail fast. Iterate to success.",
   "skills": ["JavaScript", "HTML5", "CSS3", "C#"],
-  "bioPic": "images/fry.jpg",
+  "biopic": "images/fry.jpg",
   "display": function() {
     var formattedName = HTMLheaderName.replace("%data%", bio.name);
     var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
