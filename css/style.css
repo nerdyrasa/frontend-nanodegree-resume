@@ -93,14 +93,13 @@ a {
 }
 
 .welcome-message {
-  font-style: italic;
-  font-size: 18px;
+  font-size: 24px;
   color: #f3f3f3;
   line-height: 28px;
 }
 
-#name {
-  font-family: 'Courgette', cursive;
+#name, .welcome-message {
+  font-family: "Courgette", cursive;
 }
 
 #skills li span::before {
@@ -111,6 +110,9 @@ a {
 #skills-h3 {
   color: #f5ae23;
   display: none;
+  font-style: normal;
+  font-family: "Roboto", sans-serif;
+  padding-top: 5px;
 }
 
 .role {
@@ -163,7 +165,7 @@ a {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  padding: 10px;
+  padding: 0 10px 10px 25px;
 }
 
 .center-content {
@@ -178,7 +180,7 @@ ul {
   float: left;
   padding: 10px;
   width: 200px;
-  border-radius: 50%;
+  border-radius: 15%;
   display: none;
 }
 
