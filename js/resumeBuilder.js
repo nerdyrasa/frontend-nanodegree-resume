@@ -53,7 +53,7 @@ var education = {
       "name": "University of Illinois",
       "location": "Chicago, IL",
       "degree": "BA",
-      "majors": ["Political Science", "Mathematics"],
+      "majors": ["Political Science"],
       "dates": "xxxx-xxxx",
       "url": "http://www.uic.edu/"
     }
@@ -77,7 +77,8 @@ var education = {
 
       $("#education").append(HTMLschoolStart);
 
-      var formattedNameAndDegree = HTMLschoolName.replace(data, school.name) + HTMLschoolDegree.replace(data, school.degree);
+      var formattedNameAndDegree = HTMLschoolName.replace(data, school.name).replace('#', school.url)
+                                   + HTMLschoolDegree.replace(data, school.degree);
       var formattedHTMLschoolDates = HTMLschoolDates.replace(data, school.dates);
       var formattedHTMLschoolLocation = HTMLschoolLocation.replace(data, school.location);
       var formattedHTMLschoolMajor = HTMLschoolMajor.replace(data, school.majors);
@@ -86,7 +87,6 @@ var education = {
                                  formattedHTMLschoolDates,
                                  formattedHTMLschoolLocation,
                                  formattedHTMLschoolMajor);
-      $(".education-entry:last a").attr({"href" : school.url, "target" : "_blank"});
     });
     // Append online classes header
     $("#education").append(HTMLonlineClasses);
@@ -94,7 +94,7 @@ var education = {
     education.onlineCourses.forEach(function(onlineCourse) {
       $("#education").append(HTMLschoolStart);
 
-      var formattedTitleAndSchool  = HTMLonlineTitle.replace(data, onlineCourse.title) +
+      var formattedTitleAndSchool  = HTMLonlineTitle.replace(data, onlineCourse.title).replace('#', onlineCourse.url) +
                                      HTMLonlineSchool.replace(data, onlineCourse.school);
       var formattedHTMLonlineDates = HTMLonlineDates.replace(data, onlineCourse.dates);
       var formattedHTMLonlineURL   = HTMLonlineURL.replace(data, onlineCourse.url);
@@ -102,7 +102,6 @@ var education = {
       $(".education-entry:last").append(formattedTitleAndSchool,
                                         formattedHTMLonlineDates,
                                         formattedHTMLonlineURL);
-      $(".education-entry:last a").attr({"href" : onlineCourse.url, "target" : "_blank"});
     });
   }
 };
