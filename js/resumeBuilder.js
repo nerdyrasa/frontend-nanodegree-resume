@@ -1,3 +1,4 @@
+// Placeholder for replacing html snippets with data
 var data = '%data%';
 
 var bio = {
@@ -23,17 +24,15 @@ var bio = {
     var formattedGithub = HTMLgithub.replace(data, bio.contacts.github);
     var formattedBlog = HTMLblog.replace(data, bio.contacts.blog);
     var formattedLocation = HTMLlocation.replace(data, bio.contacts.location);
-    $("#header").prepend(formattedRole);
-    $("#header").prepend(formattedName);
+    var formattedMessage = HTMLwelcomeMsg.replace(data, bio.welcomeMessage);
 
+    $("#header").prepend(formattedName, formattedRole);
+    $("#header").append(formattedPic, formattedMessage, HTMLskillsStart);
+
+    // Display contact information both on the top and bottom
     $("#topContacts, #footerContacts").append(formattedMobile, formattedEmail, formattedGithub, formattedLocation);
 
-    $("#header").append(formattedPic);
-
-    var formattedMessage = HTMLwelcomeMsg.replace(data, bio.welcomeMessage);
-    $("#header").append(formattedMessage);
-    $("#header").append(HTMLskillsStart);
-
+    // Skills are listed in an array so can be iterated through
     for (var i = 0; i < bio.skills.length; i++) {
       var formattedSkills = HTMLskills.replace(data, bio.skills[i]);
       $("#skills").append(formattedSkills);
@@ -45,7 +44,7 @@ var education = {
   "schools": [{
     "name": "DePaul University",
     "location": "Chicago, IL",
-    "degree": "Postbaccalaureate Certificate",
+    "degree": "Post-baccalaureate Certificate",
     "majors": ["Computer Science"],
     "dates": "xxxx-xxxx",
     "url": "http://www.cdm.depaul.edu/academics/pages/professionaldevelopment.aspx"
@@ -78,17 +77,16 @@ var education = {
 
       $("#education").append(HTMLschoolStart);
 
-      var formattedHTMLschoolName = HTMLschoolName.replace(data, school.name);
-      var formattedHTMLschoolDegree = HTMLschoolDegree.replace(data, school.degree);
-      var formattedNameAndDegree = formattedHTMLschoolName + formattedHTMLschoolDegree;
+      var formattedNameAndDegree = HTMLschoolName.replace(data, school.name) + HTMLschoolDegree.replace(data, school.degree);
       var formattedHTMLschoolDates = HTMLschoolDates.replace(data, school.dates);
       var formattedHTMLschoolLocation = HTMLschoolLocation.replace(data, school.location);
       var formattedHTMLschoolMajor = HTMLschoolMajor.replace(data, school.majors);
 
-      $(".education-entry:last").append(formattedNameAndDegree);
-      $(".education-entry:last").append(formattedHTMLschoolDates);
-      $(".education-entry:last").append(formattedHTMLschoolLocation);
-      $(".education-entry:last").append(formattedHTMLschoolMajor);
+      $(".education-entry:last").append(formattedNameAndDegree,
+                                 formattedHTMLschoolDates,
+                                 formattedHTMLschoolLocation,
+                                 formattedHTMLschoolMajor);
+      $(".education-entry:last a").attr({"href" : school.url, "target" : "_blank"});
     });
     // Append online classes header
     $("#education").append(HTMLonlineClasses);
@@ -96,16 +94,15 @@ var education = {
     education.onlineCourses.forEach(function(onlineCourse) {
       $("#education").append(HTMLschoolStart);
 
-      var formattedHTMLonlineTitle = HTMLonlineTitle.replace(data, onlineCourse.title);
-      var formattedHTMLonlineSchool = HTMLonlineSchool.replace(data, onlineCourse.school);
-      var formattedTitleAndSchool = formattedHTMLonlineTitle + formattedHTMLonlineSchool;
+      var formattedTitleAndSchool  = HTMLonlineTitle.replace(data, onlineCourse.title) +
+                                     HTMLonlineSchool.replace(data, onlineCourse.school);
       var formattedHTMLonlineDates = HTMLonlineDates.replace(data, onlineCourse.dates);
-      var formattedHTMLonlineURL = HTMLonlineURL.replace(data, onlineCourse.url);
+      var formattedHTMLonlineURL   = HTMLonlineURL.replace(data, onlineCourse.url);
 
-      $(".education-entry:last").append(formattedTitleAndSchool);
-      $(".education-entry:last").append(formattedHTMLonlineDates);
-      $(".education-entry:last").append(formattedHTMLonlineURL);
-
+      $(".education-entry:last").append(formattedTitleAndSchool,
+                                        formattedHTMLonlineDates,
+                                        formattedHTMLonlineURL);
+      $(".education-entry:last a").attr({"href" : onlineCourse.url, "target" : "_blank"});
     });
   }
 };
@@ -136,11 +133,11 @@ var work = {
       var formattedHTMLworkDates = HTMLworkDates.replace(data, job.dates);
       var formattedHTMLworkLocation = HTMLworkLocation.replace(data, job.location);
       var formattedHTMLworkDescription = HTMLworkDescription.replace(data, job.description);
-      //createWorkEntryDiv();
-      $(".work-entry:last").append(formattedEmployerAndTitle);
-      $(".work-entry:last").append(formattedHTMLworkDates);
-      $(".work-entry:last").append(formattedHTMLworkLocation);
-      $(".work-entry:last").append(formattedHTMLworkDescription);
+
+      $(".work-entry:last").append(formattedEmployerAndTitle,
+                                   formattedHTMLworkDates,
+                                   formattedHTMLworkLocation,
+                                   formattedHTMLworkDescription);
     });
   }
 };
@@ -174,9 +171,9 @@ var projects = {
       var formattedHTMLprojectDates = HTMLprojectDates.replace(data, project.dates);
       var formattedHTMLprojectDescription = HTMLprojectDescription.replace(data, project.description);
 
-      $(".project-entry:last").append(formattedHTMLprojectTitle);
-      $(".project-entry:last").append(formattedHTMLprojectDates);
-      $(".project-entry:last").append(formattedHTMLprojectDescription);
+      $(".project-entry:last").append(formattedHTMLprojectTitle,
+                                      formattedHTMLprojectDates,
+                                      formattedHTMLprojectDescription);
 
       project.images.forEach(function(image) {
         var e = HTMLprojectImage.replace(data, image);
@@ -192,6 +189,9 @@ var map = {
     $("#mapDiv").append(googleMap);
   }
 };
+
+// Construct the resume from the objects.
+// Objects can be listed in any order for flexibility.
 
 var resume = {
   "display": function() {
